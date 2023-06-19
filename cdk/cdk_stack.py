@@ -120,7 +120,7 @@ class CdkAppStack(Stack):
             security_group=self.server_security_group.ref,
             instance_type=ec2.InstanceType("t2.micro"),
             machine_image=ec2.MachineImage.latest_amazon_linux(),
-            instance_public_ip=False
+            
         )
 
         public_server = ec2.Instance(
@@ -133,7 +133,7 @@ class CdkAppStack(Stack):
             security_group=self.server_security_group.ref,
             instance_type=ec2.InstanceType("t2.micro"),
             machine_image=ec2.MachineImage.latest_amazon_linux(),
-            instance_public_ip=True
+            
         )
 
         
