@@ -108,33 +108,33 @@ class CdkAppStack(Stack):
 
         ## Create Ec2 Instance 
 
-        key_name= "key"
+        # key_name= "key"
 
-        private_server = ec2.Instance(
-            self,
-            "private-server",
-            instance_name="server01",
-            key_name=key_name,
-            vpc=self.vpc,
-            # vpc_subnets={"subnetId": self.vpc.private_subnets[0].subnet_id},
-            security_group=self.server_security_group.ref,
-            instance_type=ec2.InstanceType("t2.micro"),
-            machine_image=ec2.MachineImage.latest_amazon_linux2(),
+        # private_server = ec2.Instance(
+        #     self,
+        #     "private-server",
+        #     instance_name="server01",
+        #     key_name=key_name,
+        #     vpc=self.vpc,
+        #     # vpc_subnets={"subnetId": self.vpc.private_subnets[0].subnet_id},
+        #     security_group=self.server_security_group.ref,
+        #     instance_type=ec2.InstanceType("t2.micro"),
+        #     machine_image=ec2.MachineImage.latest_amazon_linux2(),
             
-        )
+        # )
 
-        public_server = ec2.Instance(
-            self,
-            "public-server",
-            instance_name="server02",
-            key_name=key_name,
-            vpc=self.vpc,
-            # vpc_subnets={"subnetId": self.vpc.public_subnets[0].subnet_id},
-            security_group=self.server_security_group.ref,
-            instance_type=ec2.InstanceType("t2.micro"),
-            machine_image=ec2.MachineImage.latest_amazon_linux2(),
+        # public_server = ec2.Instance(
+        #     self,
+        #     "public-server",
+        #     instance_name="server02",
+        #     key_name=key_name,
+        #     vpc=self.vpc,
+        #     # vpc_subnets={"subnetId": self.vpc.public_subnets[0].subnet_id},
+        #     security_group=self.server_security_group.ref,
+        #     instance_type=ec2.InstanceType("t2.micro"),
+        #     machine_image=ec2.MachineImage.latest_amazon_linux2(),
             
-        )
+        # )
 
         
 
