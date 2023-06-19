@@ -43,9 +43,9 @@ class CdkAppStack(Stack):
         igw = ec2.CfnInternetGateway(self, "MyInternetGateway")
 
         # Attach the Internet Gateway to the VPC
-        vpc.attach_gateway_to_vpc(
-            gateway_id=igw.ref,
-            vpc_id=vpc.vpc_id
+        vpc.add_gateway_attachment(
+            "MyGatewayAttachment",
+            gateway_id=igw.ref
         )
 
         
