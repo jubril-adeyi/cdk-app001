@@ -26,7 +26,7 @@ class CdkAppStack(Stack):
                     cidr_mask=subnet_mask
                 ),
                 ec2.SubnetConfiguration(
-                    subnet_type=ec2.SubnetType.iSOLATED,
+                    subnet_type=ec2.SubnetType.ISOLATED,
                     name="Isolated",
                     cidr_mask=subnet_mask
                 ),
