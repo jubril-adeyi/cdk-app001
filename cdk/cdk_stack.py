@@ -154,7 +154,7 @@ class CdkAppStack(Stack):
             key_name=key_name,
             vpc=self.vpc,
             vpc_subnets=ec2.SubnetSelection(subnet_group_name="Public2"),
-            security_group=self.server_security_group.ref,
+            security_group=self.server_security_group,
             instance_type=ec2.InstanceType("t2.micro"),
         )
 
