@@ -13,14 +13,14 @@ class CdkStack(Stack):
         super().__init__(scope, construct_id, **kwargs)
     
         subnet_mask= 24
-        vpc_cidr= "10.0.0.0/16"
+        vpc_ip_adresses= ["10.0.0.0/16"]
 
 
         vpc = ec2.Vpc(
             self,
             "MyVpc",
             vpc_name= "server-vpc",
-            cidr='vpc_cidr',
+            cidr='vpc_ip_adresses',
             subnet_configuration=[
                 ec2.SubnetConfiguration(
                     subnet_type=ec2.SubnetType.PUBLIC,
