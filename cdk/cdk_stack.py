@@ -1,10 +1,10 @@
 from constructs import Construct
 from aws_cdk import (Duration, 
     Stack, 
-    aws_ec2 as ec2, )
+    aws_ec2 as ec2, 
     # CfnOutput, 
     # autoscaling as autoscale, 
-    # elbv2 as elb)
+    elbv2 as elb)
 
 class CdkAppStack(Stack):
     def __init__(self, scope: Construct, construct_id: str, **kwargs) -> None:
@@ -289,9 +289,12 @@ class CdkAppStack(Stack):
             security_group=self.private_bastion_sg,
             instance_type=ec2.InstanceType("t2.micro"),
         )
+
+
+        ##Setting Up Load Balancer 
         
 
-        
+
 
 
 
