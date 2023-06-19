@@ -21,7 +21,7 @@ class CdkAppStack(Stack):
                     cidr_mask=subnet_mask
                 ),
                 ec2.SubnetConfiguration(
-                    subnet_type=ec2.SubnetType.PUBLIC
+                    subnet_type=ec2.SubnetType.PUBLIC,
                     name="Public2",
                     cidr_mask=subnet_mask
                 )
