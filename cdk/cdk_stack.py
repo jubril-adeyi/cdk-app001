@@ -92,69 +92,69 @@ class CdkAppStack(Stack):
         # # )       
 
 
-        # # # # Create a security group server-sg
+        # Create a security group server-sg
 
-        # # # self.server_security_group = ec2.CfnSecurityGroup(
-        # # #     self, "ServerSecurityGroup",
-        # # #     group_description="server security group",
-        # # #     group_name="server-sg",
-        # # #     vpc_id=self.vpc.vpc_id,
-        # # #     security_group_ingress=[
-        # # #         {
-        # # #             "ipProtocol": "tcp",
-        # # #             "fromPort": 80,
-        # # #             "toPort": 80,
-        # # #             "cidrIp": "0.0.0.0/0"
-        # # #         },
-        # # #         {
-        # # #             "ipProtocol": "tcp",
-        # # #             "fromPort": 443,
-        # # #             "toPort": 443,
-        # # #             "cidrIp": "0.0.0.0/0"
-        # # #         },
-        # # #         {
-        # # #             "ipProtocol": "tcp",
-        # # #             "fromPort": 22,
-        # # #             "toPort": 22,
-        # # #             "cidrIp": "0.0.0.0/0"
-        # # #         }
-        # # #     ],
-        # # #     security_group_egress=[
-        # # #         {
-        # # #             "ipProtocol": "-1",
-        # # #             "cidrIp": "0.0.0.0/0"
-        # # #         }
-        # # #     ]
-        # # # )
+        self.server_security_group = ec2.CfnSecurityGroup(
+            self, "ServerSecurityGroup",
+            group_description="server security group",
+            group_name="server-sg",
+            vpc_id=self.vpc.vpc_id,
+            security_group_ingress=[
+                {
+                    "ipProtocol": "tcp",
+                    "fromPort": 80,
+                    "toPort": 80,
+                    "cidrIp": "0.0.0.0/0"
+                },
+                {
+                    "ipProtocol": "tcp",
+                    "fromPort": 443,
+                    "toPort": 443,
+                    "cidrIp": "0.0.0.0/0"
+                },
+                {
+                    "ipProtocol": "tcp",
+                    "fromPort": 22,
+                    "toPort": 22,
+                    "cidrIp": "0.0.0.0/0"
+                }
+            ],
+            security_group_egress=[
+                {
+                    "ipProtocol": "-1",
+                    "cidrIp": "0.0.0.0/0"
+                }
+            ]
+        )
 
-        # # # # Create a security group lb-sg
+        # Create a security group lb-sg
         
-        # # # self.lb_security_group = ec2.CfnSecurityGroup(
-        # # #     self, "LbSecurityGroup",
-        # # #     group_description="lb security group",
-        # # #     group_name="lb-sg",
-        # # #     vpc_id=self.vpc.vpc_id,
-        # # #     security_group_ingress=[
-        # # #         {
-        # # #             "ipProtocol": "tcp",
-        # # #             "fromPort": 80,
-        # # #             "toPort": 80,
-        # # #             "cidrIp": "0.0.0.0/0"
-        # # #         },
-        # # #         {
-        # # #             "ipProtocol": "tcp",
-        # # #             "fromPort": 22,
-        # # #             "toPort": 22,
-        # # #             "cidrIp": "0.0.0.0/0"
-        # # #         }
-        # # #     ],
-        # # #     security_group_egress=[
-        # # #         {
-        # # #             "ipProtocol": "-1",
-        # # #             "cidrIp": "0.0.0.0/0"
-        # # #         }
-        # # #     ]
-        # # # )
+        self.lb_security_group = ec2.CfnSecurityGroup(
+            self, "LbSecurityGroup",
+            group_description="lb security group",
+            group_name="lb-sg",
+            vpc_id=self.vpc.vpc_id,
+            security_group_ingress=[
+                {
+                    "ipProtocol": "tcp",
+                    "fromPort": 80,
+                    "toPort": 80,
+                    "cidrIp": "0.0.0.0/0"
+                },
+                {
+                    "ipProtocol": "tcp",
+                    "fromPort": 22,
+                    "toPort": 22,
+                    "cidrIp": "0.0.0.0/0"
+                }
+            ],
+            security_group_egress=[
+                {
+                    "ipProtocol": "-1",
+                    "cidrIp": "0.0.0.0/0"
+                }
+            ]
+        )
 
         
 
