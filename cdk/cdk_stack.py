@@ -192,29 +192,29 @@ class CdkAppStack(Stack):
         #     instance_type=ec2.InstanceType("t2.micro"),
         # )
 
-        public_server_1 = ec2.Instance(
-            self,
-            "public-server-1",
-            instance_name="server03",
-            machine_image=ec2.MachineImage.latest_amazon_linux(generation=ec2.AmazonLinuxGeneration.AMAZON_LINUX_2),
-            key_name=key_name,
-            vpc=self.vpc,
-            vpc_subnets=ec2.SubnetSelection(subnet_group_name="Public1"),
-            security_group=self.server_security_group,
-            instance_type=ec2.InstanceType("t2.micro"), 
-        )
+        # public_server_1 = ec2.Instance(
+        #     self,
+        #     "public-server-1",
+        #     instance_name="server03",
+        #     machine_image=ec2.MachineImage.latest_amazon_linux(generation=ec2.AmazonLinuxGeneration.AMAZON_LINUX_2),
+        #     key_name=key_name,
+        #     vpc=self.vpc,
+        #     vpc_subnets=ec2.SubnetSelection(subnet_group_name="Public1"),
+        #     security_group=self.server_security_group,
+        #     instance_type=ec2.InstanceType("t2.micro"), 
+        # )
 
-        public_server_2 = ec2.Instance(
-            self,
-            "public-server-2",
-            instance_name="server04",
-            machine_image=ec2.MachineImage.latest_amazon_linux(generation=ec2.AmazonLinuxGeneration.AMAZON_LINUX_2),
-            key_name=key_name,
-            vpc=self.vpc,
-            vpc_subnets=ec2.SubnetSelection(subnet_group_name="Public2"),
-            security_group=self.server_security_group,
-            instance_type=ec2.InstanceType("t2.micro"),
-        )
+        # public_server_2 = ec2.Instance(
+        #     self,
+        #     "public-server-2",
+        #     instance_name="server04",
+        #     machine_image=ec2.MachineImage.latest_amazon_linux(generation=ec2.AmazonLinuxGeneration.AMAZON_LINUX_2),
+        #     key_name=key_name,
+        #     vpc=self.vpc,
+        #     vpc_subnets=ec2.SubnetSelection(subnet_group_name="Public2"),
+        #     security_group=self.server_security_group,
+        #     instance_type=ec2.InstanceType("t2.micro"),
+        # )
 
 
 
@@ -244,20 +244,20 @@ class CdkAppStack(Stack):
             peer=ec2.Peer.ipv4("0.0.0.0/0"),
             connection=ec2.Port.all_traffic(),
         )    
-        ## Create bastion Ec2 instance 
-        bastion_host = ec2.Instance(
-            self,
-            "bastion-host",
-            instance_name="server05",
-            machine_image=ec2.MachineImage.latest_amazon_linux(generation=ec2.AmazonLinuxGeneration.AMAZON_LINUX_2),
-            key_name=key_name,
-            vpc=self.vpc,
-            vpc_subnets=ec2.SubnetSelection(subnet_group_name="Public2"),
-            security_group=self.bastion_sg,
-            instance_type=ec2.InstanceType("t2.micro"),
-        )
+        # ## Create bastion Ec2 instance 
+        # bastion_host = ec2.Instance(
+        #     self,
+        #     "bastion-host",
+        #     instance_name="server05",
+        #     machine_image=ec2.MachineImage.latest_amazon_linux(generation=ec2.AmazonLinuxGeneration.AMAZON_LINUX_2),
+        #     key_name=key_name,
+        #     vpc=self.vpc,
+        #     vpc_subnets=ec2.SubnetSelection(subnet_group_name="Public2"),
+        #     security_group=self.bastion_sg,
+        #     instance_type=ec2.InstanceType("t2.micro"),
+        # )
 
-        ## Create sg for private Instance for bastion access 
+        # ## Create sg for private Instance for bastion access 
 
         self.private_bastion_sg = ec2.SecurityGroup(
             self, "PrivateBastionSecurityGroup",
@@ -276,19 +276,19 @@ class CdkAppStack(Stack):
             connection=ec2.Port.all_traffic(),
         )  
 
-        ## create Private instance 
+        # ## create Private instance 
 
-        private_bastion = ec2.Instance(
-            self,
-            "private-server-3",
-            instance_name="server06",
-            machine_image=ec2.MachineImage.latest_amazon_linux(generation=ec2.AmazonLinuxGeneration.AMAZON_LINUX_2),
-            key_name=key_name,
-            vpc=self.vpc,
-            vpc_subnets=ec2.SubnetSelection(subnet_group_name="Privatewithnat2"),
-            security_group=self.private_bastion_sg,
-            instance_type=ec2.InstanceType("t2.micro"),
-        )
+        # private_bastion = ec2.Instance(
+        #     self,
+        #     "private-server-3",
+        #     instance_name="server06",
+        #     machine_image=ec2.MachineImage.latest_amazon_linux(generation=ec2.AmazonLinuxGeneration.AMAZON_LINUX_2),
+        #     key_name=key_name,
+        #     vpc=self.vpc,
+        #     vpc_subnets=ec2.SubnetSelection(subnet_group_name="Privatewithnat2"),
+        #     security_group=self.private_bastion_sg,
+        #     instance_type=ec2.InstanceType("t2.micro"),
+        # )
 
 
         ##Setting Up Load Balancer 
