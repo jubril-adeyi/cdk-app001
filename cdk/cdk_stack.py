@@ -42,7 +42,7 @@ class CdkAppStack(Stack):
 
         # Create a security group server-sg
 
-        security_group = ec2.CfnSecurityGroup(
+        server_security_group = ec2.CfnSecurityGroup(
             self, "ServerSecurityGroup",
             group_description="server security group",
             group_name="server-sg",
@@ -77,7 +77,7 @@ class CdkAppStack(Stack):
 
         # Create a security group lb-sg
         
-        security_group = ec2.CfnSecurityGroup(
+        lb_security_group = ec2.CfnSecurityGroup(
             self, "LbSecurityGroup",
             group_description="lb security group",
             group_name="lb-sg",
@@ -104,10 +104,3 @@ class CdkAppStack(Stack):
             ]
         )
 
-
-        # # Create a security group
-        # security_group = ec2.SecurityGroup(
-        #     self, "MySecurityGroup",
-        #     vpc=self.vpc,
-        #     allow_all_outbound=True,
-        # )
