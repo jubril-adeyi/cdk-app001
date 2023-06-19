@@ -46,13 +46,11 @@ class CdkAppStack(Stack):
 
         # Fetch private subnet IDs based on subnet names
         private_subnet_ids = ec2.SubnetFilter(
-        vpc_id=self.vpc.vpc_id,
         subnet_name=private_subnet_names
         ).subnet_ids
 
         # Fetch public subnet IDs based on subnet names
         public_subnet_ids = ec2.SubnetFilter(
-        vpc_id=self.vpc.vpc_id,
             subnet_name=public_subnet_names
         ).subnet_ids
 
