@@ -1,10 +1,10 @@
 from constructs import Construct
 from aws_cdk import (Duration, 
     Stack, 
-    aws_ec2 as ec2, 
+    aws_ec2 as ec2, )
     # CfnOutput, 
     # autoscaling as autoscale, 
-    aws_elbv2 as elb)
+    # aws_elbv2 as elb)
 
 class CdkAppStack(Stack):
     def __init__(self, scope: Construct, construct_id: str, **kwargs) -> None:
