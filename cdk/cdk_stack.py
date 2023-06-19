@@ -1,4 +1,4 @@
-from aws_cdk import Duration, Stack, aws_ec2 as ec2
+from aws_cdk import Duration, Stack, aws_ec2 as ec2, CfnOutput
 from constructs import Construct
 
 class CdkAppStack(Stack):
