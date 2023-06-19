@@ -5,6 +5,8 @@ class CdkAppStack(Stack):
     def __init__(self, scope: Construct, construct_id: str, **kwargs) -> None:
         super().__init__(scope, construct_id, **kwargs)
 
+        ## Create Vpc 
+
         subnet_mask = 24
         vpc_cidr = "10.0.0.0/16"
 
@@ -36,4 +38,11 @@ class CdkAppStack(Stack):
                     cidr_mask=subnet_mask
                 )
             ]
+        )
+
+        # Create a security group
+        security_group = ec2.SecurityGroup(
+            self, "MySecurityGroup",
+            vpc=self.vpc,
+            allow_all_outbound=True,
         )
