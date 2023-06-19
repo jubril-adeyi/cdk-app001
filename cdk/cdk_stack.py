@@ -22,12 +22,12 @@ class CdkAppStack(Stack):
                 ),
                 ec2.SubnetConfiguration(
                     subnet_type=ec2.SubnetType.PRIVATE_WITH_NAT,
-                    name="Privatewithnat",
+                    name="Privatewithnat1",
                     cidr_mask=subnet_mask
                 ),
                 ec2.SubnetConfiguration(
                     subnet_type=ec2.SubnetType.PRIVATE_WITH_NAT,
-                    name="",
+                    name="Privatewithnat2",
                     cidr_mask=subnet_mask
                 ),
                 ec2.SubnetConfiguration(
