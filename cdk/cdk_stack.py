@@ -278,7 +278,7 @@ class CdkAppStack(Stack):
 
         private_bastion = ec2.Instance(
             self,
-            "private-server-2",
+            "private-server-3",
             instance_name="server06",
             machine_image=ec2.MachineImage.latest_amazon_linux(generation=ec2.AmazonLinuxGeneration.AMAZON_LINUX_2),
             key_name=key_name,
