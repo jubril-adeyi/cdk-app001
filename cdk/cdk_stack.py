@@ -106,7 +106,7 @@ class CdkAppStack(Stack):
 
         
 
-        ## Create Ec2 Instance 
+        ## Create Ec2 Instances
 
         key_name= "key"
 
