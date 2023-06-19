@@ -41,23 +41,6 @@ class CdkAppStack(Stack):
         )
 
 
-        private_subnet_names = ["Privatewithnat1", "Privatewithnat2"]
-        public_subnet_names = ["Public1", "Public2"]
-
-        # Fetch private subnet IDs based on subnet names
-        private_subnet_ids = ec2.SubnetFilter(
-        subnet_name=private_subnet_names
-        ).subnet_ids
-
-        # Fetch public subnet IDs based on subnet names
-        public_subnet_ids = ec2.SubnetFilter(
-            subnet_name=public_subnet_names
-        ).subnet_ids
-
-
-
-        
-
         # Create a security group server-sg
 
         self.server_security_group = ec2.CfnSecurityGroup(
@@ -128,51 +111,51 @@ class CdkAppStack(Stack):
         key_name = "key"  # Replace with your actual key name
 
         private_server_1 = ec2.Instance(
-        self,
-        "private-server-1",
-        instance_name="server01",
-        machine_image=ec2.MachineImage.latest_amazon_linux(generation=ec2.AmazonLinuxGeneration.AMAZON_LINUX_2),
-        key_name=key_name,
-        vpc=self.vpc,
-        vpc_subnets=ec2.SubnetSelection(subnet_ids=[private_subnet_ids[0]]),
-        security_group=self.server_security_group.ref,
-        instance_type=ec2.InstanceType("t2.micro"),
+            self,
+            "private-server-1",
+            instance_name="server01",
+            machine_image=ec2.MachineImage.latest_amazon_linux(generation=ec2.AmazonLinuxGeneration.AMAZON_LINUX_2),
+            key_name=key_name,
+            vpc=self.vpc,
+            vpc_subnets=ec2.SubnetSelection(subnet_name="Privatewithnat1"),
+            security_group=self.server_security_group.ref,
+            instance_type=ec2.InstanceType("t2.micro"),
         )
 
         private_server_2 = ec2.Instance(
-        self,
-        "private-server-2",
-        instance_name="server02",
-        machine_image=ec2.MachineImage.latest_amazon_linux(generation=ec2.AmazonLinuxGeneration.AMAZON_LINUX_2),
-        key_name=key_name,
-        vpc=self.vpc,
-        vpc_subnets=ec2.SubnetSelection(subnet_ids=[private_subnet_ids[1]]),
-        security_group=self.server_security_group.ref,
-        instance_type=ec2.InstanceType("t2.micro"),
+            self,
+            "private-server-2",
+            instance_name="server02",
+            machine_image=ec2.MachineImage.latest_amazon_linux(generation=ec2.AmazonLinuxGeneration.AMAZON_LINUX_2),
+            key_name=key_name,
+            vpc=self.vpc,
+            vpc_subnets=ec2.SubnetSelection(subnet_name="Privatewithnat2"),
+            security_group=self.server_security_group.ref,
+            instance_type=ec2.InstanceType("t2.micro"),
         )
 
         public_server_1 = ec2.Instance(
-        self,
-        "public-server-1",
-        instance_name="server03",
-        machine_image=ec2.MachineImage.latest_amazon_linux(generation=ec2.AmazonLinuxGeneration.AMAZON_LINUX_2),
-        key_name=key_name,
-        vpc=self.vpc,
-        vpc_subnets=ec2.SubnetSelection(subnet_ids=[public_subnet_ids[0]]),
-        security_group=self.server_security_group.ref,
-        instance_type=ec2.InstanceType("t2.micro"), 
+            self,
+            "public-server-1",
+            instance_name="server03",
+            machine_image=ec2.MachineImage.latest_amazon_linux(generation=ec2.AmazonLinuxGeneration.AMAZON_LINUX_2),
+            key_name=key_name,
+            vpc=self.vpc,
+            vpc_subnets=ec2.SubnetSelection(subnet_name="Public1"),
+            security_group=self.server_security_group.ref,
+            instance_type=ec2.InstanceType("t2.micro"), 
         )
 
         public_server_2 = ec2.Instance(
-        self,
-        "public-server-2",
-        instance_name="server04",
-        machine_image=ec2.MachineImage.latest_amazon_linux(generation=ec2.AmazonLinuxGeneration.AMAZON_LINUX_2),
-        key_name=key_name,
-        vpc=self.vpc,
-        vpc_subnets=ec2.SubnetSelection(subnet_ids=[public_subnet_ids[1]]),
-        security_group=self.server_security_group.ref,
-        instance_type=ec2.InstanceType("t2.micro"),
+            self,
+            "public-server-2",
+            instance_name="server04",
+            machine_image=ec2.MachineImage.latest_amazon_linux(generation=ec2.AmazonLinuxGeneration.AMAZON_LINUX_2),
+            key_name=key_name,
+            vpc=self.vpc,
+            vpc_subnets=ec2.SubnetSelection(subnet_name="Public2"),
+            security_group=self.server_security_group.ref,
+            instance_type=ec2.InstanceType("t2.micro"),
         )
 
         
