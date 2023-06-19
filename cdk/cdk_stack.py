@@ -40,56 +40,56 @@ class CdkAppStack(Stack):
             ]
         )
 
-        # # # Create a security group server-sg
-        # # self.server_security_group = ec2.SecurityGroup(
-        # #     self, "ServerSecurityGroup",
-        # #     security_group_name="server-sg",
-        # #     description="server security group",
-        # #     vpc=self.vpc
-        # # )
+        # Create a security group server-sg
+        self.server_security_group = ec2.SecurityGroup(
+            self, "ServerSecurityGroup",
+            security_group_name="server-sg",
+            description="server security group",
+            vpc=self.vpc
+        )
 
-        # # self.server_security_group.add_ingress_rule(
-        # #     peer=ec2.Peer.ipv4("0.0.0.0/0"),
-        # #     connection=ec2.Port.tcp(80),
-        # # )
+        self.server_security_group.add_ingress_rule(
+            peer=ec2.Peer.ipv4("0.0.0.0/0"),
+            connection=ec2.Port.tcp(80),
+        )
 
-        # # self.server_security_group.add_ingress_rule(
-        # # peer=ec2.Peer.ipv4("0.0.0.0/0"),
-        # # connection=ec2.Port.tcp(443),
-        # # )   
+        self.server_security_group.add_ingress_rule(
+        peer=ec2.Peer.ipv4("0.0.0.0/0"),
+        connection=ec2.Port.tcp(443),
+        )   
 
-        # # self.server_security_group.add_ingress_rule(
-        # #     peer=ec2.Peer.ipv4("0.0.0.0/0"),
-        # #     connection=ec2.Port.tcp(22),
-        # # )
+        self.server_security_group.add_ingress_rule(
+            peer=ec2.Peer.ipv4("0.0.0.0/0"),
+            connection=ec2.Port.tcp(22),
+        )
 
-        # # self.server_security_group.add_egress_rule(
-        # #     peer=ec2.Peer.ipv4("0.0.0.0/0"),
-        # #     connection=ec2.Port.all_traffic(),
-        # # )
+        self.server_security_group.add_egress_rule(
+            peer=ec2.Peer.ipv4("0.0.0.0/0"),
+            connection=ec2.Port.all_traffic(),
+        )
 
-        # # # Create a security group lb-sg
-        # # self.lb_security_group = ec2.SecurityGroup(
-        # #     self, "LbSecurityGroup",
-        # #     security_group_name="lb-sg",
-        # #     description="lb security group",
-        # #     vpc=self.vpc
-        # # )
+        # Create a security group lb-sg
+        self.lb_security_group = ec2.SecurityGroup(
+            self, "LbSecurityGroup",
+            security_group_name="lb-sg",
+            description="lb security group",
+            vpc=self.vpc
+        )
 
-        # # self.lb_security_group.add_ingress_rule(
-        # #     peer=ec2.Peer.ipv4("0.0.0.0/0"),
-        # #     connection=ec2.Port.tcp(80),
-        # # )
+        self.lb_security_group.add_ingress_rule(
+            peer=ec2.Peer.ipv4("0.0.0.0/0"),
+            connection=ec2.Port.tcp(80),
+        )
 
-        # # self.lb_security_group.add_ingress_rule(
-        # #     peer=ec2.Peer.ipv4("0.0.0.0/0"),
-        # #     connection=ec2.Port.tcp(22),
-        # # )   
+        self.lb_security_group.add_ingress_rule(
+            peer=ec2.Peer.ipv4("0.0.0.0/0"),
+            connection=ec2.Port.tcp(22),
+        )   
 
-        # # self.lb_security_group.add_egress_rule(
-        # #     peer=ec2.Peer.ipv4("0.0.0.0/0"),
-        # #     connection=ec2.Port.all_traffic(),
-        # # )       
+        self.lb_security_group.add_egress_rule(
+            peer=ec2.Peer.ipv4("0.0.0.0/0"),
+            connection=ec2.Port.all_traffic(),
+        )       
 
 
         # Create a security group server-sg
@@ -158,56 +158,56 @@ class CdkAppStack(Stack):
 
         
 
-        # # Create Ec2 Instances
-        # key_name = "key"  # Replace with your actual key name
+        # Create Ec2 Instances
+        key_name = "key"  # Replace with your actual key name
 
-        # private_server_1 = ec2.Instance(
-        #     self,
-        #     "private-server-1",
-        #     instance_name="server01",
-        #     machine_image=ec2.MachineImage.latest_amazon_linux(generation=ec2.AmazonLinuxGeneration.AMAZON_LINUX_2),
-        #     key_name=key_name,
-        #     vpc=self.vpc,
-        #     vpc_subnets=ec2.SubnetSelection(subnet_group_name="Privatewithnat1"),
-        #     security_group=self.server_security_group,
-        #     instance_type=ec2.InstanceType("t2.micro"),
-        # )
+        private_server_1 = ec2.Instance(
+            self,
+            "private-server-1",
+            instance_name="server01",
+            machine_image=ec2.MachineImage.latest_amazon_linux(generation=ec2.AmazonLinuxGeneration.AMAZON_LINUX_2),
+            key_name=key_name,
+            vpc=self.vpc,
+            vpc_subnets=ec2.SubnetSelection(subnet_group_name="Privatewithnat1"),
+            security_group=self.server_security_group,
+            instance_type=ec2.InstanceType("t2.micro"),
+        )
 
-        # private_server_2 = ec2.Instance(
-        #     self,
-        #     "private-server-2",
-        #     instance_name="server02",
-        #     machine_image=ec2.MachineImage.latest_amazon_linux(generation=ec2.AmazonLinuxGeneration.AMAZON_LINUX_2),
-        #     key_name=key_name,
-        #     vpc=self.vpc,
-        #     vpc_subnets=ec2.SubnetSelection(subnet_group_name="Privatewithnat2"),
-        #     security_group=self.server_security_group,
-        #     instance_type=ec2.InstanceType("t2.micro"),
-        # )
+        private_server_2 = ec2.Instance(
+            self,
+            "private-server-2",
+            instance_name="server02",
+            machine_image=ec2.MachineImage.latest_amazon_linux(generation=ec2.AmazonLinuxGeneration.AMAZON_LINUX_2),
+            key_name=key_name,
+            vpc=self.vpc,
+            vpc_subnets=ec2.SubnetSelection(subnet_group_name="Privatewithnat2"),
+            security_group=self.server_security_group,
+            instance_type=ec2.InstanceType("t2.micro"),
+        )
 
-        # public_server_1 = ec2.Instance(
-        #     self,
-        #     "public-server-1",
-        #     instance_name="server03",
-        #     machine_image=ec2.MachineImage.latest_amazon_linux(generation=ec2.AmazonLinuxGeneration.AMAZON_LINUX_2),
-        #     key_name=key_name,
-        #     vpc=self.vpc,
-        #     vpc_subnets=ec2.SubnetSelection(subnet_group_name="Public1"),
-        #     security_group=self.server_security_group,
-        #     instance_type=ec2.InstanceType("t2.micro"), 
-        # )
+        public_server_1 = ec2.Instance(
+            self,
+            "public-server-1",
+            instance_name="server03",
+            machine_image=ec2.MachineImage.latest_amazon_linux(generation=ec2.AmazonLinuxGeneration.AMAZON_LINUX_2),
+            key_name=key_name,
+            vpc=self.vpc,
+            vpc_subnets=ec2.SubnetSelection(subnet_group_name="Public1"),
+            security_group=self.server_security_group,
+            instance_type=ec2.InstanceType("t2.micro"), 
+        )
 
-        # public_server_2 = ec2.Instance(
-        #     self,
-        #     "public-server-2",
-        #     instance_name="server04",
-        #     machine_image=ec2.MachineImage.latest_amazon_linux(generation=ec2.AmazonLinuxGeneration.AMAZON_LINUX_2),
-        #     key_name=key_name,
-        #     vpc=self.vpc,
-        #     vpc_subnets=ec2.SubnetSelection(subnet_group_name="Public2"),
-        #     security_group=self.server_security_group,
-        #     instance_type=ec2.InstanceType("t2.micro"),
-        # )
+        public_server_2 = ec2.Instance(
+            self,
+            "public-server-2",
+            instance_name="server04",
+            machine_image=ec2.MachineImage.latest_amazon_linux(generation=ec2.AmazonLinuxGeneration.AMAZON_LINUX_2),
+            key_name=key_name,
+            vpc=self.vpc,
+            vpc_subnets=ec2.SubnetSelection(subnet_group_name="Public2"),
+            security_group=self.server_security_group,
+            instance_type=ec2.InstanceType("t2.micro"),
+        )
 
         
 
