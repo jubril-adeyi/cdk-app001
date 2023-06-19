@@ -12,7 +12,7 @@ class CdkAppStack(Stack):
             self,
             "MyVpc",
             vpc_name="server-vpc",
-            max_azs=1,
+            max_azs=2,
             cidr=vpc_cidr,
             subnet_configuration=[
                 ec2.SubnetConfiguration(
@@ -20,6 +20,11 @@ class CdkAppStack(Stack):
                     name="Public1",
                     cidr_mask=subnet_mask
                 ),
+                ec2.SubnetConfiguration(
+                    subnet_type=ec2.SubnetType.PUBLIC
+                    name="Public2",
+                    cidr_mask=subnet_mask
+                )
                 ec2.SubnetConfiguration(
                     subnet_type=ec2.SubnetType.PRIVATE_WITH_EGRESS,
                     name="Privatewithnat1",
@@ -29,11 +34,38 @@ class CdkAppStack(Stack):
                     subnet_type=ec2.SubnetType.PRIVATE_WITH_EGRESS,
                     name="Privatewithnat2",
                     cidr_mask=subnet_mask
-                ),
-                ec2.SubnetConfiguration(
-                    subnet_type=ec2.SubnetType.PRIVATE_ISOLATED,
-                    name="PrivateIsolated",
-                    cidr_mask=subnet_mask
                 )
             ]
         )
+
+        ## Create IGW in VPC that was created
+
+        igw = ec2.CfnInternetGateway(self, "MyInternetGateway")
+
+        # Attach the Internet Gateway to the VPC
+        vpc.attach_gateway_to_vpc(
+            gateway_id=igw.ref,
+            vpc_id=vpc.vpc_id
+        )
+
+        
+        # Create a Route Table
+        route_table = ec2.CfnRouteTable(self, "MyRouteTable", vpc_id=vpc.vpc_id)
+
+        # Create a Route for the IGW
+        ec2.CfnRoute(
+            self,
+            "MyRoute",
+            route_table_id=route_table.ref,
+            destination_cidr_block="0.0.0.0/0",
+            gateway_id=igw.ref
+        )
+
+        # Associate subnets with the Route Table
+        for subnet in vpc.public_subnets:
+            ec2.CfnSubnetRouteTableAssociation(
+                self,
+                f"{subnet.node.id}RouteTableAssociation",
+                subnet_id=subnet.subnet_id,
+                route_table_id=route_table.ref
+            )
