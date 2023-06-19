@@ -40,121 +40,121 @@ class CdkAppStack(Stack):
             ]
         )
 
-        # Create a security group server-sg
-        self.server_security_group = ec2.SecurityGroup(
-            self, "ServerSecurityGroup",
-            security_group_name="server-sg",
-            description="server security group",
-            vpc=self.vpc
-        )
-
-        self.server_security_group.add_ingress_rule(
-            peer=ec2.Peer.ipv4("0.0.0.0/0"),
-            connection=ec2.Port.tcp(80),
-        )
-
-        self.server_security_group.add_ingress_rule(
-        peer=ec2.Peer.ipv4("0.0.0.0/0"),
-        connection=ec2.Port.tcp(443),
-        )   
-
-        self.server_security_group.add_ingress_rule(
-            peer=ec2.Peer.ipv4("0.0.0.0/0"),
-            connection=ec2.Port.tcp(22),
-        )
-
-        self.server_security_group.add_egress_rule(
-            peer=ec2.Peer.ipv4("0.0.0.0/0"),
-            connection=ec2.Port.all_traffic(),
-        )
-
-        # Create a security group lb-sg
-        self.lb_security_group = ec2.SecurityGroup(
-            self, "LbSecurityGroup",
-            security_group_name="lb-sg",
-            description="lb security group",
-            vpc=self.vpc
-        )
-
-        self.lb_security_group.add_ingress_rule(
-            peer=ec2.Peer.ipv4("0.0.0.0/0"),
-            connection=ec2.Port.tcp(80),
-        )
-
-        self.lb_security_group.add_ingress_rule(
-            peer=ec2.Peer.ipv4("0.0.0.0/0"),
-            connection=ec2.Port.tcp(22),
-        )   
-
-        self.lb_security_group.add_egress_rule(
-            peer=ec2.Peer.ipv4("0.0.0.0/0"),
-            connection=ec2.Port.all_traffic(),
-        )       
-
-
         # # Create a security group server-sg
-
-        # self.server_security_group = ec2.CfnSecurityGroup(
+        # self.server_security_group = ec2.SecurityGroup(
         #     self, "ServerSecurityGroup",
-        #     group_description="server security group",
-        #     group_name="server-sg",
-        #     vpc_id=self.vpc.vpc_id,
-        #     security_group_ingress=[
-        #         {
-        #             "ipProtocol": "tcp",
-        #             "fromPort": 80,
-        #             "toPort": 80,
-        #             "cidrIp": "0.0.0.0/0"
-        #         },
-        #         {
-        #             "ipProtocol": "tcp",
-        #             "fromPort": 443,
-        #             "toPort": 443,
-        #             "cidrIp": "0.0.0.0/0"
-        #         },
-        #         {
-        #             "ipProtocol": "tcp",
-        #             "fromPort": 22,
-        #             "toPort": 22,
-        #             "cidrIp": "0.0.0.0/0"
-        #         }
-        #     ],
-        #     security_group_egress=[
-        #         {
-        #             "ipProtocol": "-1",
-        #             "cidrIp": "0.0.0.0/0"
-        #         }
-        #     ]
+        #     security_group_name="server-sg",
+        #     description="server security group",
+        #     vpc=self.vpc
+        # )
+
+        # self.server_security_group.add_ingress_rule(
+        #     peer=ec2.Peer.ipv4("0.0.0.0/0"),
+        #     connection=ec2.Port.tcp(80),
+        # )
+
+        # self.server_security_group.add_ingress_rule(
+        # peer=ec2.Peer.ipv4("0.0.0.0/0"),
+        # connection=ec2.Port.tcp(443),
+        # )   
+
+        # self.server_security_group.add_ingress_rule(
+        #     peer=ec2.Peer.ipv4("0.0.0.0/0"),
+        #     connection=ec2.Port.tcp(22),
+        # )
+
+        # self.server_security_group.add_egress_rule(
+        #     peer=ec2.Peer.ipv4("0.0.0.0/0"),
+        #     connection=ec2.Port.all_traffic(),
         # )
 
         # # Create a security group lb-sg
-        
-        # self.lb_security_group = ec2.CfnSecurityGroup(
+        # self.lb_security_group = ec2.SecurityGroup(
         #     self, "LbSecurityGroup",
-        #     group_description="lb security group",
-        #     group_name="lb-sg",
-        #     vpc_id=self.vpc.vpc_id,
-        #     security_group_ingress=[
-        #         {
-        #             "ipProtocol": "tcp",
-        #             "fromPort": 80,
-        #             "toPort": 80,
-        #             "cidrIp": "0.0.0.0/0"
-        #         },
-        #         {
-        #             "ipProtocol": "tcp",
-        #             "fromPort": 22,
-        #             "toPort": 22,
-        #             "cidrIp": "0.0.0.0/0"
-        #         }
-        #     ],
-        #     security_group_egress=[
-        #         {
-        #             "ipProtocol": "-1",
-        #             "cidrIp": "0.0.0.0/0"
-        #         }
-        #     ]
+        #     security_group_name="lb-sg",
+        #     description="lb security group",
+        #     vpc=self.vpc
         # )
+
+        # self.lb_security_group.add_ingress_rule(
+        #     peer=ec2.Peer.ipv4("0.0.0.0/0"),
+        #     connection=ec2.Port.tcp(80),
+        # )
+
+        # self.lb_security_group.add_ingress_rule(
+        #     peer=ec2.Peer.ipv4("0.0.0.0/0"),
+        #     connection=ec2.Port.tcp(22),
+        # )   
+
+        # self.lb_security_group.add_egress_rule(
+        #     peer=ec2.Peer.ipv4("0.0.0.0/0"),
+        #     connection=ec2.Port.all_traffic(),
+        # )       
+
+
+        # # # Create a security group server-sg
+
+        # # self.server_security_group = ec2.CfnSecurityGroup(
+        # #     self, "ServerSecurityGroup",
+        # #     group_description="server security group",
+        # #     group_name="server-sg",
+        # #     vpc_id=self.vpc.vpc_id,
+        # #     security_group_ingress=[
+        # #         {
+        # #             "ipProtocol": "tcp",
+        # #             "fromPort": 80,
+        # #             "toPort": 80,
+        # #             "cidrIp": "0.0.0.0/0"
+        # #         },
+        # #         {
+        # #             "ipProtocol": "tcp",
+        # #             "fromPort": 443,
+        # #             "toPort": 443,
+        # #             "cidrIp": "0.0.0.0/0"
+        # #         },
+        # #         {
+        # #             "ipProtocol": "tcp",
+        # #             "fromPort": 22,
+        # #             "toPort": 22,
+        # #             "cidrIp": "0.0.0.0/0"
+        # #         }
+        # #     ],
+        # #     security_group_egress=[
+        # #         {
+        # #             "ipProtocol": "-1",
+        # #             "cidrIp": "0.0.0.0/0"
+        # #         }
+        # #     ]
+        # # )
+
+        # # # Create a security group lb-sg
+        
+        # # self.lb_security_group = ec2.CfnSecurityGroup(
+        # #     self, "LbSecurityGroup",
+        # #     group_description="lb security group",
+        # #     group_name="lb-sg",
+        # #     vpc_id=self.vpc.vpc_id,
+        # #     security_group_ingress=[
+        # #         {
+        # #             "ipProtocol": "tcp",
+        # #             "fromPort": 80,
+        # #             "toPort": 80,
+        # #             "cidrIp": "0.0.0.0/0"
+        # #         },
+        # #         {
+        # #             "ipProtocol": "tcp",
+        # #             "fromPort": 22,
+        # #             "toPort": 22,
+        # #             "cidrIp": "0.0.0.0/0"
+        # #         }
+        # #     ],
+        # #     security_group_egress=[
+        # #         {
+        # #             "ipProtocol": "-1",
+        # #             "cidrIp": "0.0.0.0/0"
+        # #         }
+        # #     ]
+        # # )
 
         
 
