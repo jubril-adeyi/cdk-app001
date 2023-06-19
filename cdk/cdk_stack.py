@@ -216,7 +216,7 @@ class CdkAppStack(Stack):
 
 
 
-        
+
 
         ##Set up bastion Host for private instances 
 
@@ -258,9 +258,9 @@ class CdkAppStack(Stack):
         ## Create sg for private Instance for bastion access 
 
         self.private_bastion_sg = ec2.SecurityGroup(
-            self, "BastionSecurityGroup",
-            security_group_name="bastion-sg",
-            description="bastion security group",
+            self, "PrivateBastionSecurityGroup",
+            security_group_name="private-bastion-sg",
+            description="private bastion security group",
             vpc=self.vpc
         )
 
@@ -279,12 +279,12 @@ class CdkAppStack(Stack):
         private_bastion = ec2.Instance(
             self,
             "private-server-2",
-            instance_name="server02",
+            instance_name="server06",
             machine_image=ec2.MachineImage.latest_amazon_linux(generation=ec2.AmazonLinuxGeneration.AMAZON_LINUX_2),
             key_name=key_name,
             vpc=self.vpc,
             vpc_subnets=ec2.SubnetSelection(subnet_group_name="Privatewithnat2"),
-            security_group=self.server_security_group,
+            security_group=self.private_bastion_sg,
             instance_type=ec2.InstanceType("t2.micro"),
         )
 
