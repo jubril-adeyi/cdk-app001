@@ -20,7 +20,7 @@ class CdkStack(Stack):
             self,
             "MyVpc",
             vpc_name= "server-vpc",
-            cidr='vpc_ip_adresses',
+            ip_addresses=vpc_ip_adresses,
             subnet_configuration=[
                 ec2.SubnetConfiguration(
                     subnet_type=ec2.SubnetType.PUBLIC,
