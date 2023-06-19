@@ -12,7 +12,7 @@ class CdkAppStack(Stack):
             self,
             "MyVpc",
             vpc_name="server-vpc",
-            max_azs=2
+            max_azs=2,
             cidr=vpc_cidr,
             subnet_configuration=[
                 ec2.SubnetConfiguration(
