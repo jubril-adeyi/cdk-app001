@@ -119,7 +119,7 @@ class CdkAppStack(Stack):
             # vpc_subnets={"subnetId": self.vpc.private_subnets[0].subnet_id},
             security_group=self.server_security_group.ref,
             instance_type=ec2.InstanceType("t2.micro"),
-            machine_image=ec2.MachineImage.latest_amazon_linux(),
+            machine_image=ec2.MachineImage.latest_amazon_linux2(),
             
         )
 
@@ -132,7 +132,7 @@ class CdkAppStack(Stack):
             # vpc_subnets={"subnetId": self.vpc.public_subnets[0].subnet_id},
             security_group=self.server_security_group.ref,
             instance_type=ec2.InstanceType("t2.micro"),
-            machine_image=ec2.MachineImage.latest_amazon_linux(),
+            machine_image=ec2.MachineImage.latest_amazon_linux2(),
             
         )
 
