@@ -117,7 +117,7 @@ class CdkAppStack(Stack):
             machine_image=ec2.MachineImage.latest_amazon_linux(generation=ec2.AmazonLinuxGeneration.AMAZON_LINUX_2),
             key_name=key_name,
             vpc=self.vpc,
-            vpc_subnets=ec2.SubnetSelection(subnet_name="Privatewithnat1"),
+            vpc_subnets=ec2.SubnetSelection(subnet_group_name="Privatewithnat1"),
             security_group=self.server_security_group.ref,
             instance_type=ec2.InstanceType("t2.micro"),
         )
@@ -129,7 +129,7 @@ class CdkAppStack(Stack):
             machine_image=ec2.MachineImage.latest_amazon_linux(generation=ec2.AmazonLinuxGeneration.AMAZON_LINUX_2),
             key_name=key_name,
             vpc=self.vpc,
-            vpc_subnets=ec2.SubnetSelection(subnet_name="Privatewithnat2"),
+            vpc_subnets=ec2.SubnetSelection(subnet_group_name="Privatewithnat2"),
             security_group=self.server_security_group.ref,
             instance_type=ec2.InstanceType("t2.micro"),
         )
@@ -141,7 +141,7 @@ class CdkAppStack(Stack):
             machine_image=ec2.MachineImage.latest_amazon_linux(generation=ec2.AmazonLinuxGeneration.AMAZON_LINUX_2),
             key_name=key_name,
             vpc=self.vpc,
-            vpc_subnets=ec2.SubnetSelection(subnet_name="Public1"),
+            vpc_subnets=ec2.SubnetSelection(subnet_group_name="Public1"),
             security_group=self.server_security_group.ref,
             instance_type=ec2.InstanceType("t2.micro"), 
         )
@@ -153,7 +153,7 @@ class CdkAppStack(Stack):
             machine_image=ec2.MachineImage.latest_amazon_linux(generation=ec2.AmazonLinuxGeneration.AMAZON_LINUX_2),
             key_name=key_name,
             vpc=self.vpc,
-            vpc_subnets=ec2.SubnetSelection(subnet_name="Public2"),
+            vpc_subnets=ec2.SubnetSelection(subnet_group_name="Public2"),
             security_group=self.server_security_group.ref,
             instance_type=ec2.InstanceType("t2.micro"),
         )
