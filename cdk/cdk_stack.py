@@ -112,13 +112,13 @@ class CdkAppStack(Stack):
 
         private_server = ec2.Instance(
             self,
-            "server",
+            "private-server",
             instance_name="server01",
             key_name=key_name,
             vpc=self.vpc,
             vpc_subnets=ec2.SubnetSelection(subnets=[
                 self.vpc.select_subnets(subnet_name="Privatewithnat1")[0]
-            ])
+            ]),
             security_group=self.server_security_group.ref,
             instance_type=ec2.InstanceType("t2.micro"),
             machine_image=ec2.MachineImage.latest_amazon_linux(),
@@ -127,13 +127,13 @@ class CdkAppStack(Stack):
 
         public_server = ec2.Instance(
             self,
-            "server",
-            instance_name="server01",
+            "public-server",
+            instance_name="server02",
             key_name=key_name,
             vpc=self.vpc,
             vpc_subnets=ec2.SubnetSelection(subnets=[
                 self.vpc.select_subnets(subnet_name="Public1")[0]
-            ])
+            ]),
             security_group=self.server_security_group.ref,
             instance_type=ec2.InstanceType("t2.micro"),
             machine_image=ec2.MachineImage.latest_amazon_linux(),
