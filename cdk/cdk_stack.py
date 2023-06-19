@@ -37,32 +37,3 @@ class CdkAppStack(Stack):
                 )
             ]
         )
-
-        ## Create IGW in VPC that was created
-
-        igw = ec2.CfnInternetGateway(self, "MyInternetGateway")
-
-        # Attach the Internet Gateway to the VPC
-
-
-        
-        # Create a Route Table
-        route_table = ec2.CfnRouteTable(self, "MyRouteTable", vpc_id=vpc.vpc_id)
-
-        # Create a Route for the IGW
-        ec2.CfnRoute(
-            self,
-            "MyRoute",
-            route_table_id=route_table.ref,
-            destination_cidr_block="0.0.0.0/0",
-            gateway_id=igw.ref
-        )
-
-        # Associate subnets with the Route Table
-        for subnet in vpc.public_subnets:
-            ec2.CfnSubnetRouteTableAssociation(
-                self,
-                f"{subnet.node.id}RouteTableAssociation",
-                subnet_id=subnet.subnet_id,
-                route_table_id=route_table.ref
-            )
