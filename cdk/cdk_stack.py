@@ -1,7 +1,9 @@
 from aws_cdk import (
-    # Duration,
+    Duration,
     Stack,
-    # aws_sqs as sqs,
+    aws_ec2 as ec2,
+
+
 )
 from constructs import Construct
 
@@ -9,11 +11,20 @@ class CdkStack(Stack):
 
     def __init__(self, scope: Construct, construct_id: str, **kwargs) -> None:
         super().__init__(scope, construct_id, **kwargs)
+    
+        subnet_mask= 24
+        vpc_cidr= "10.0.0.0/16"
 
-        # The code that defines your stack goes here
 
-        # example resource
-        # queue = sqs.Queue(
-        #     self, "CdkQueue",
-        #     visibility_timeout=Duration.seconds(300),
-        # )
+        vpc = ec2.Vpc(
+            self,
+            "MyVpc",
+            vpc_name= "server-vpc",
+            cidr='vpc_cidr',
+            subnet_configuration=[
+                ec2.SubnetConfiguration(
+                    subnet_type=ec2.SubnetType.PUBLIC,
+                    name="Public1",
+                    cidr_mask=subnet_mask
+                )]
+        )
