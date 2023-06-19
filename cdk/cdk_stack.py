@@ -2,7 +2,7 @@ from constructs import Construct
 from aws_cdk import (Duration, 
     Stack, 
     aws_ec2 as ec2,
-    # autoscaling as autoscale, 
+    aws_autoscaling as autoscaling , 
     aws_elasticloadbalancingv2 as elb)
 
 class CdkAppStack(Stack):
