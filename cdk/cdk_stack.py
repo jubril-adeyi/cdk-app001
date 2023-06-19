@@ -12,6 +12,7 @@ class CdkAppStack(Stack):
             self,
             "MyVpc",
             vpc_name="server-vpc",
+            max_azs=2
             cidr=vpc_cidr,
             subnet_configuration=[
                 ec2.SubnetConfiguration(
@@ -20,18 +21,18 @@ class CdkAppStack(Stack):
                     cidr_mask=subnet_mask
                 ),
                 ec2.SubnetConfiguration(
-                    subnet_type=ec2.SubnetType.PUBLIC,
-                    name="Public2",
+                    subnet_type=ec2.SubnetType.PRIVATE_WITH_NAT,
+                    name="Privatewithnat",
                     cidr_mask=subnet_mask
                 ),
                 ec2.SubnetConfiguration(
-                    subnet_type=ec2.SubnetType.PRIVATE,
-                    name="Private1",
+                    subnet_type=ec2.SubnetType.iSOLATED,
+                    name="Isolated",
                     cidr_mask=subnet_mask
                 ),
                 ec2.SubnetConfiguration(
-                    subnet_type=ec2.SubnetType.PRIVATE,
-                    name="Private2",
+                    subnet_type=ec2.SubnetType.PRIVATE_ISOLATED,
+                    name="PrivateIsolated",
                     cidr_mask=subnet_mask
                 )
             ]
