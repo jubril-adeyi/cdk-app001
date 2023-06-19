@@ -24,7 +24,7 @@ class CdkAppStack(Stack):
                     subnet_type=ec2.SubnetType.PUBLIC,
                     name="Public2",
                     cidr_mask=subnet_mask
-                )
+                ),
                 ec2.SubnetConfiguration(
                     subnet_type=ec2.SubnetType.PRIVATE_WITH_EGRESS,
                     name="Privatewithnat1",
