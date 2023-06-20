@@ -319,10 +319,10 @@ class CdkAppStack(Stack):
             protocol=elb.ApplicationProtocol.HTTP,
             vpc=self.vpc,
             stickiness_cookie_duration=Duration.seconds(30),
-            targets=[
-                elb.InstanceTarget(public_server_1.instance_id, port=80),
-                elb.InstanceTarget(public_server_2.instance_id, port=80),
-            ]
+            # targets=[
+            #     elb.InstanceTarget(public_server_1.instance_id, port=80),
+            #     elb.InstanceTarget(public_server_2.instance_id, port=80),
+            # ]
         )
 
         # Configure health checks for the target group
@@ -337,23 +337,9 @@ class CdkAppStack(Stack):
         # # Add targets to target group
 
         # Add instances to the target group
-        # server_tg.register_targets(
-        #     "TargetGroupTargets",
-        #     targets=[
-        #         elbv2.InstanceTarget(public_server_1.instance_id, port=80),
-        #         elbv2.InstanceTarget(public_server_2.instance_id, port=80),
-        #         ]
-        # )
-
-
-
-        
-
-        # server_tg.add_targets("TargetGroupTargets", 
-        #     port=80, 
-        #     targets=[Publicinstance1, Publicinstance2])
-
-        ## Attach the target group to the load balancer
+        # Register instances with the target group
+        server_tg.add_target(elb.InstanceTarget(public_server_1.instance_id))
+        server_tg.add_target(elb.InstanceTarget(public_server_2.instance_id))
 
         listener= lb.add_listener("listener",
             port=lb_port,
