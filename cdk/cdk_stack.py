@@ -332,7 +332,7 @@ class CdkAppStack(Stack):
 
         # # Add targets to target group
 
-        server_tg.add_targets(
+        server_tg.add_target(
             targets=[
                 elb.InstanceTarget(instance_id="public_server_1.instance_id"),
                 elb.InstanceTarget(instance_id="public_server_2.instance_id"),
