@@ -334,8 +334,8 @@ class CdkAppStack(Stack):
 
         # # Add targets to target group
 
-        server_tg.add_target(public_server_2)
-        server_tg.add_target(public_server_2)
+        # server_tg.add_target(public_server_2)
+        # server_tg.add_target(public_server_2)
 
         ## Attach the target group to the load balancer
 
