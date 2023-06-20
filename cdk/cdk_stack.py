@@ -323,8 +323,8 @@ class CdkAppStack(Stack):
             path="/",  
             interval=Duration.seconds(300),
             timeout=Duration.seconds(60),
-            healthy_threshold_count=Duration.seconds(5),
-            unhealthy_threshold_count=Duration.seconds(5)
+            healthy_threshold_count=5,
+            unhealthy_threshold_count=5
         )
 
         # # Add targets to target group
