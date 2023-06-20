@@ -332,19 +332,30 @@ class CdkAppStack(Stack):
 
         # # Add targets to target group
 
+        # Add instances to the target group
+        server_tg.register_targets(
+            "TargetGroupTargets",
+            targets=[
+                elbv2.InstanceTarget(public_server_1.instance_id, port=80),
+                elbv2.InstanceTarget(public_server_2.instance_id, port=80),
+                ]
+        )
+
+
+
+        
+
         # server_tg.add_targets("TargetGroupTargets", 
         #     port=80, 
         #     targets=[Publicinstance1, Publicinstance2])
-        # ## Attach the target group to the load balancer
+
+        ## Attach the target group to the load balancer
 
         listener= lb.add_listener("listener",
             port=lb_port,
             protocol=elb.ApplicationProtocol.HTTP,
             default_target_groups=[server_tg]
         )
-
-
-
 
 
 
