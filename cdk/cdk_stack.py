@@ -306,7 +306,7 @@ class CdkAppStack(Stack):
             internet_facing=True,
             security_group=self.lb_security_group,
             # vpc_subnets=ec2.SubnetSelection(subnet_group_name=public_subnets_names)
-            vpc_subnets=ec2.SubnetSelection(subnet_group_name=subnet_ids)
+            vpc_subnets=ec2.SubnetSelection(subnet_ids=subnet_ids)
         )
 
 
