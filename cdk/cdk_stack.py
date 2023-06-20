@@ -18,7 +18,7 @@ class CdkAppStack(Stack):
             self,
             "MyVpc",
             vpc_name="server-vpc",
-            max_azs=2,
+            max_azs=3,
             cidr=vpc_cidr,
             subnet_configuration=[
                 ec2.SubnetConfiguration(
@@ -304,7 +304,7 @@ class CdkAppStack(Stack):
         #     internet_facing=True,
         #     security_group=self.lb_security_group,
         #     # vpc_subnets=ec2.SubnetSelection(subnet_group_name=public_subnets_names)
-        #     vpc_subnets=ec2.SubnetSelection(subnet_group_name="Public1")
+        #     vpc_subnets=ec2.SubnetSelection(subnet_group_name=ec2.SubnetType.PUBLIC)
         # )
 
 
