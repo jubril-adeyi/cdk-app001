@@ -3,7 +3,9 @@ from aws_cdk import (Duration,
     Stack, 
     aws_ec2 as ec2,
     aws_autoscaling as autoscaling , 
-    aws_elasticloadbalancingv2 as elb)
+    aws_elasticloadbalancingv2 as elb,
+    aws_elasticloadbalancingv2_targets as elb_targets
+    )
 
 class CdkAppStack(Stack):
     def __init__(self, scope: Construct, construct_id: str, **kwargs) -> None:
@@ -320,8 +322,8 @@ class CdkAppStack(Stack):
             vpc=self.vpc,
             stickiness_cookie_duration=Duration.seconds(30),
             targets=[
-                elb.InstanceIdTarget(public_server_1.instance_id, port=80),
-                elb.InstanceIdTarget(public_server_2.instance_id, port=80),
+                elb_targets.InstanceIdTarget(public_server_1.instance_id, port=80),
+                elb_targets.InstanceIdTarget(public_server_2.instance_id, port=80),
             ]
         )
 
