@@ -347,6 +347,19 @@ class CdkAppStack(Stack):
         )
 
 
+        # Extract public Ips into host inventory file 
+        public_server_1_ip = public_server_1.instance_public_ip
+        public_server_2_ip = public_server_2.instance_public_ip
+
+        content = f"""
+            {public_server_1_ip} 
+            {public_server_2_ip}
+             """
+
+        # Write the content to a local file
+        with open("host-inventory", "w") as file:
+            file.write(content)
+
 
 
 
