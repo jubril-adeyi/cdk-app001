@@ -294,8 +294,8 @@ class CdkAppStack(Stack):
 
         public_subnets_names=["Public1","Public2"]
         subnet_ids = [
-            vpc.select_subnets(subnet_name="Public1").subnet_ids[0],
-            vpc.select_subnets(subnet_name="Public2").subnet_ids[0]
+            self.vpc.select_subnets(subnet_name="Public1").subnet_ids[0],
+            self.vpc.select_subnets(subnet_name="Public2").subnet_ids[0]
         ]
 
         lb = elb.ApplicationLoadBalancer(
