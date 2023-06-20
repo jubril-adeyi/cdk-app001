@@ -296,9 +296,6 @@ class CdkAppStack(Stack):
 
 
         lb_port=80
-        lb_protocol="HTTP"
-    
-
 
         # Setting Up Load Balancer 
         lb = elb.ApplicationLoadBalancer(
@@ -319,6 +316,7 @@ class CdkAppStack(Stack):
             target_group_name= "server-tg",
             target_type=elb.TargetType.INSTANCE,
             port=lb_port,
+            protocol=elb.ApplicationProtocol.HTTP,
             vpc=self.vpc,
             stickiness_cookie_duration=Duration.seconds(30),
         )
