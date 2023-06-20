@@ -296,16 +296,16 @@ class CdkAppStack(Stack):
 
 
         # Setting Up Load Balancer 
-        # lb = elb.ApplicationLoadBalancer(
-        #     self,
-        #     "load-balancer2227",
-        #     load_balancer_name="server-lb",
-        #     vpc=self.vpc,
-        #     internet_facing=True,
-        #     security_group=self.lb_security_group,
-        #     # vpc_subnets=ec2.SubnetSelection(subnet_group_name=public_subnets_names)
-        #     vpc_subnets=ec2.SubnetSelection(subnet_group_name=ec2.SubnetType.PUBLIC)
-        # )
+        lb = elb.ApplicationLoadBalancer(
+            self,
+            "load-balancer2227",
+            load_balancer_name="server-lb",
+            vpc=self.vpc,
+            internet_facing=True,
+            security_group=self.lb_security_group,
+            # vpc_subnets=ec2.SubnetSelection(subnet_group_name=public_subnets_names)
+            vpc_subnets=ec2.SubnetSelection(subnet_type=ec2.SubnetType.PUBLIC)
+        )
 
 
 
