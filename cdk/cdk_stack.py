@@ -339,7 +339,7 @@ class CdkAppStack(Stack):
 
         ## Attach the target group to the load balancer
 
-        listener= lb.add_listener("listener"
+        listener= lb.add_listener("listener",
             port=lb_port,
             protocol="HTTP",
             default_target_groups=[server_tg]
