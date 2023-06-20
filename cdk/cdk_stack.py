@@ -338,18 +338,14 @@ class CdkAppStack(Stack):
             unhealthy_threshold_count=5
         )
 
-        # # Add targets to target group
-
-        # Add instances to the target group
-        # Register instances with the target group
-        # server_tg.add_target(elb.InstanceTarget(public_server_1.instance_id))
-        # server_tg.add_target(elb.InstanceTarget(public_server_2.instance_id))
+        # # Set listener to listen to tg
 
         listener= lb.add_listener("listener",
             port=lb_port,
             protocol=elb.ApplicationProtocol.HTTP,
             default_target_groups=[server_tg]
         )
+
 
 
 
