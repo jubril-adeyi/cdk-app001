@@ -320,8 +320,8 @@ class CdkAppStack(Stack):
             vpc=self.vpc,
             stickiness_cookie_duration=Duration.seconds(30),
             targets=[
-                lb.InstanceTarget(public_server_1.instance_id, port=80),
-                lb.InstanceTarget(public_server_2.instance_id, port=80),
+                elb.InstanceTarget(public_server_1.instance_id, port=80),
+                elb.InstanceTarget(public_server_2.instance_id, port=80),
             ]
         )
 
