@@ -295,6 +295,11 @@ class CdkAppStack(Stack):
         # )
 
 
+        lb_port=80
+        lb_protocol="HTTP"
+    
+
+
         # Setting Up Load Balancer 
         lb = elb.ApplicationLoadBalancer(
             self,
@@ -313,7 +318,7 @@ class CdkAppStack(Stack):
             "server-tg",
             target_group_name= "server-tg",
             target_type=elb.TargetType.INSTANCE,
-            port=80,
+            port=lb_port,
             vpc=self.vpc,
             stickiness_cookie_duration=Duration.seconds(30),
         )
@@ -329,9 +334,18 @@ class CdkAppStack(Stack):
 
         # # Add targets to target group
 
-        # server_tg.add_target(
-        #     elb.InstanceTarget()
-        # )
+        server_tg.add_target(public_server_2)
+        server_tg.add_target(public_server_2)
+
+        ## Attach the target group to the load balancer
+
+        listener= lb.add_listener("listener"
+            port=lb_port,
+            protocol="HTTP",
+            default_target_groups=[server_tg]
+        )
+
+
 
 
 
