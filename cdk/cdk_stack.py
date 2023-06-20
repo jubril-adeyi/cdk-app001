@@ -293,6 +293,10 @@ class CdkAppStack(Stack):
         ## Setting Up Load Balancer 
 
         public_subnets_names=["Public1","Public2"]
+        subnet_ids = [
+            vpc.select_subnets(subnet_name="Public1").subnet_ids[0],
+            vpc.select_subnets(subnet_name="Public2").subnet_ids[0]
+        ]
 
         lb = elb.ApplicationLoadBalancer(
             self,
@@ -301,7 +305,8 @@ class CdkAppStack(Stack):
             vpc=self.vpc,
             internet_facing=True,
             security_group=self.lb_security_group,
-            vpc_subnets=ec2.SubnetSelection(subnet_group_name=public_subnets_names)
+            # vpc_subnets=ec2.SubnetSelection(subnet_group_name=public_subnets_names)
+            vpc_subnets=ec2.SubnetSelection(subnet_group_name=subnet_ids)
         )
 
 
