@@ -46,36 +46,6 @@ class CdkAppStack(Stack):
             ]
         )
 
-        # Create a security group server-sg
-
-
-        self.server_security_group = ec2.SecurityGroup(
-            self, "ServerSecurityGroup",
-            security_group_name="server-sg",
-            description="server security group",
-            vpc=self.vpc
-        )
-
-        self.server_security_group.add_ingress_rule(
-            peer=ec2.Peer.ipv4("0.0.0.0/0"),
-            connection=ec2.Port.tcp(80),
-        )
-
-        self.server_security_group.add_ingress_rule(
-        peer=ec2.Peer.ipv4("0.0.0.0/0"),
-        connection=ec2.Port.tcp(443),
-        )   
-
-        self.server_security_group.add_ingress_rule(
-            peer=ec2.Peer.ipv4("0.0.0.0/0"),
-            connection=ec2.Port.tcp(22),
-        )
-
-        self.server_security_group.add_egress_rule(
-            peer=ec2.Peer.ipv4("0.0.0.0/0"),
-            connection=ec2.Port.all_traffic(),
-        )
-
         # Create a security group lb-sg
         self.lb_security_group = ec2.SecurityGroup(
             self, "LbSecurityGroup",
@@ -104,6 +74,38 @@ class CdkAppStack(Stack):
             connection=ec2.Port.all_traffic(),
         )       
 
+
+        # Create a security group server-sg
+
+
+        self.server_security_group = ec2.SecurityGroup(
+            self, "ServerSecurityGroup",
+            security_group_name="server-sg",
+            description="server security group",
+            vpc=self.vpc
+        )
+
+        self.server_security_group.add_ingress_rule(
+            peer=self.lb_security_group,
+            connection=ec2.Port.tcp(80),
+        )
+
+        # self.server_security_group.add_ingress_rule(
+        # peer=ec2.Peer.ipv4("0.0.0.0/0"),
+        # connection=ec2.Port.tcp(443),
+        # )   
+
+        self.server_security_group.add_ingress_rule(
+            peer=ec2.Peer.ipv4("0.0.0.0/0"),
+            connection=ec2.Port.tcp(22),
+        )
+
+        self.server_security_group.add_egress_rule(
+            peer=ec2.Peer.ipv4("0.0.0.0/0"),
+            connection=ec2.Port.all_traffic(),
+        )
+
+        
 
         # Create a security group server-sg using CfnSecurityGroup
 
