@@ -333,10 +333,13 @@ class CdkAppStack(Stack):
         # # Add targets to target group
 
         server_tg.add_target(
-            targets=[
-                elb.InstanceTarget(instance_id="public_server_1.instance_id"),
-                elb.InstanceTarget(instance_id="public_server_2.instance_id"),
-            ]
+            elb.InstanceIdTarget(public_server_1.instance_id),
+            port=80
+        )
+
+        server_tg.add_target(
+            elb.InstanceIdTarget(public_server_2.instance_id),
+            port=80
         )
         ## Attach the target group to the load balancer
 
