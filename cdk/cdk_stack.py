@@ -319,7 +319,7 @@ class CdkAppStack(Stack):
         )
 
         # Configure health checks for the target group
-        target_group.configure_health_check(
+        server_tg.configure_health_check(
             path="/",  
             interval=Duration.seconds(300),
             timeout=Duration.seconds(60),
