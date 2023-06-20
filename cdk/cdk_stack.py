@@ -309,7 +309,7 @@ class CdkAppStack(Stack):
 
         ## target group creation
 
-        server_tg = elbv2.ApplicationTargetGroup(self, 
+        server_tg = elb.ApplicationTargetGroup(self, 
             "server-tg",
             target_group_name= "server-tg",
             target_type=elb.TargetType.INSTANCE,
