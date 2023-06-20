@@ -319,6 +319,10 @@ class CdkAppStack(Stack):
             protocol=elb.ApplicationProtocol.HTTP,
             vpc=self.vpc,
             stickiness_cookie_duration=Duration.seconds(30),
+            targets=[
+                lb.InstanceTarget(public_server_1.instance_id, port=80),
+                lb.InstanceTarget(public_server_2.instance_id, port=80),
+            ]
         )
 
         # Configure health checks for the target group
@@ -333,13 +337,13 @@ class CdkAppStack(Stack):
         # # Add targets to target group
 
         # Add instances to the target group
-        server_tg.register_targets(
-            "TargetGroupTargets",
-            targets=[
-                elbv2.InstanceTarget(public_server_1.instance_id, port=80),
-                elbv2.InstanceTarget(public_server_2.instance_id, port=80),
-                ]
-        )
+        # server_tg.register_targets(
+        #     "TargetGroupTargets",
+        #     targets=[
+        #         elbv2.InstanceTarget(public_server_1.instance_id, port=80),
+        #         elbv2.InstanceTarget(public_server_2.instance_id, port=80),
+        #         ]
+        # )
 
 
 
