@@ -341,7 +341,7 @@ class CdkAppStack(Stack):
 
         listener= lb.add_listener("listener",
             port=lb_port,
-            protocol="HTTP",
+            protocol=elb.ApplicationProtocol.HTTP,
             default_target_groups=[server_tg]
         )
 
