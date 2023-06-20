@@ -314,7 +314,6 @@ class CdkAppStack(Stack):
             target_group_name= "server-tg",
             target_type=elb.TargetType.INSTANCE,
             port=80,
-            protocol=elb.Protocol.HTTP,
             vpc=self.vpc,
             stickiness_cookie_duration=Duration.seconds(30),
         )
