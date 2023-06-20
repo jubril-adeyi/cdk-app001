@@ -90,7 +90,12 @@ class CdkAppStack(Stack):
         self.lb_security_group.add_ingress_rule(
             peer=ec2.Peer.ipv4("0.0.0.0/0"),
             connection=ec2.Port.tcp(22),
-        )   
+        )
+
+        self.lb_security_group.add_ingress_rule(
+            peer=ec2.Peer.ipv4("0.0.0.0/0"),
+            connection=ec2.Port.tcp(443),
+        )      
 
         self.lb_security_group.add_egress_rule(
             peer=ec2.Peer.ipv4("0.0.0.0/0"),
