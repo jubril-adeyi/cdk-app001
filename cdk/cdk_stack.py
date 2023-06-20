@@ -303,8 +303,39 @@ class CdkAppStack(Stack):
             vpc=self.vpc,
             internet_facing=True,
             security_group=self.lb_security_group,
-            vpc_subnets=ec2.SubnetSelection(subnet_type=ec2.SubnetType.PUBLIC)
+            vpc_subnets=ec2.SubnetSelection(subnet_type=ec2.SubnetType.PUBLIC),
+            deletion_protection=None
         )
+
+        ## target group creation
+
+        server_tg = elbv2.ApplicationTargetGroup(self, 
+            "server-tg",
+            target_group_name= "server-tg",
+            target_type=elb.TargetType.INSTANCE,
+            port=80,
+            protocol=elb.Protocol.HTTP,
+            vpc=self.vpc,
+            stickiness_cookie_duration=Duration.seconds(30),
+        )
+
+        # Configure health checks for the target group
+        target_group.configure_health_check(
+            path="/",  
+            interval=Duration.seconds(300),
+            timeout=Duration.seconds(60),
+            healthy_threshold_count=Duration.seconds(5)
+            unhealthy_threshold_count=Duration.seconds(5)
+        )
+
+        # # Add targets to target group
+
+        # server_tg.add_target(
+        #     elb.InstanceTarget()
+        # )
+
+
+
 
 
 
