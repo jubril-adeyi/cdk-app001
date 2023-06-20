@@ -18,7 +18,7 @@ class CdkAppStack(Stack):
             self,
             "MyVpc",
             vpc_name="server-vpc",
-            max_azs=1,
+            max_azs=2,
             cidr=vpc_cidr,
             subnet_configuration=[
                 ec2.SubnetConfiguration(
@@ -295,7 +295,7 @@ class CdkAppStack(Stack):
         # )
 
 
-        ## Setting Up Load Balancer 
+        # Setting Up Load Balancer 
         # lb = elb.ApplicationLoadBalancer(
         #     self,
         #     "load-balancer2227",
@@ -304,7 +304,7 @@ class CdkAppStack(Stack):
         #     internet_facing=True,
         #     security_group=self.lb_security_group,
         #     # vpc_subnets=ec2.SubnetSelection(subnet_group_name=public_subnets_names)
-        #     vpc_subnets=ec2.SubnetSelection(subnet_type=ec2.SubnetType.PUBLIC)
+        #     vpc_subnets=ec2.SubnetSelection(subnet_group_name="Public1")
         # )
 
 
