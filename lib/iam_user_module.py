@@ -7,11 +7,13 @@ class IamUserStack(Stack):
         super().__init__(scope, construct_id, **kwargs)
 
         # Create IAM user
-        user = iam.User(self, "MyUser", user_name="my-user-name")
+        user = iam.User(self, "AdminUser", user_name="mainAdmin")
+
+        user.add_to_group("admin")
 
         # Add IAM user policies
-        user.add_managed_policy(iam.ManagedPolicy.from_aws_managed_policy_name("AmazonS3ReadOnlyAccess"))
-        user.add_inline_policy(
+        user.add_managed_policy(iam.ManagedPolicy.from_aws_managed_policy_name("AdministratorAccess"))
+        user.attach_inline_policy(
             iam.Policy(
                 self,
                 "MyInlinePolicy",
