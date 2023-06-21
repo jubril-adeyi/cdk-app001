@@ -26,7 +26,7 @@ load_balancer_module=LoadBalancerModule(app,"LbModule",
      public_server_1=ec2_module.public_server_1, 
      public_server_2=ec2_module.public_server_2)
 
-load_balancer_modulee.add_dependency(ec2_module)
+load_balancer_module.add_dependency(ec2_module)
 
 
 # # Add more modules/stacks as needed
