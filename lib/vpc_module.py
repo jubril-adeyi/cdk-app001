@@ -37,7 +37,7 @@ class VpcModule(Stack):
             self, "LbSecurityGroup",
             security_group_name="lb-sg",
             description="lb security group",
-            vpc=vpc
+            vpc=self.vpc
         )
 
         lb_security_group.add_ingress_rule(
@@ -68,7 +68,7 @@ class VpcModule(Stack):
             self, "ServerSecurityGroup",
             security_group_name="server-sg",
             description="server security group",
-            vpc=vpc
+            vpc=self.vpc
         )
 
         server_security_group.add_ingress_rule(
