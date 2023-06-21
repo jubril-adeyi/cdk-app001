@@ -31,8 +31,8 @@ app = cdk.App()
 # Instantiate VpcModule
 vpc_module = VpcModule(app, "VpcModule")
 
-# # Instantiate Ec2Module and pass the VPC and server security group
-# ec2_module = Ec2Module(app, "Ec2Module", vpc=vpc_module.vpc, server_security_group=vpc_module.server_security_group)
+# Instantiate Ec2Module and pass the VPC and server security group
+ec2_module = Ec2Module(app, "Ec2Module", vpc=vpc_module.vpc, server_security_group=vpc_module.server_security_group)
 
 # # Add more modules/stacks as needed
 
