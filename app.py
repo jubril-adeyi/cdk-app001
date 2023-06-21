@@ -15,9 +15,9 @@ class CdkAppStack(Stack):
 
         vpc_module = VpcModule(self, "VpcModule")
 
-        ec2_instance_module=Ec2Module(self,"Ec2Module")
+        ec2_instance_module=Ec2Module(self,"Ec2Module", vpc_module.vpc)
 
-        
+
 
 
 
