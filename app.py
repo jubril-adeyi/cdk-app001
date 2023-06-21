@@ -16,7 +16,7 @@ class CdkAppStack(Stack):
 
         vpc_module = VpcModule(self, "VpcModule")
 
-        ec2_instance_module=Ec2Module(self,"Ec2Module", vpc_module)
+        ec2_instance_module=Ec2Module(self,"Ec2Module", vpc, server_security_group)
 
         # load_balancer_module=LoadbalancerModule(self,"LbModule", ec2_instance_module.ec2, vpc_module.vpc)
 
