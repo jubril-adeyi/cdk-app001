@@ -12,7 +12,7 @@ class VpcModule(Stack):
         subnet_mask = 24
         vpc_cidr = "10.0.0.0/16"
 
-        vpc = ec2.Vpc(
+        self.vpc = ec2.Vpc(
             self,
             "MyVpc",
             vpc_name="server-vpc",
