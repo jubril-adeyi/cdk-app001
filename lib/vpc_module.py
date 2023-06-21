@@ -12,7 +12,7 @@ class VpcModule(Stack):
         subnet_mask = 24
         vpc_cidr = "10.0.0.0/16"
 
-        self.vpc = ec2.Vpc(
+        vpc = ec2.Vpc(
             self,
             "MyVpc",
             vpc_name="server-vpc",
@@ -33,29 +33,29 @@ class VpcModule(Stack):
         )
 
         # Create a security group lb-sg
-        self.lb_security_group = ec2.SecurityGroup(
+        lb_security_group = ec2.SecurityGroup(
             self, "LbSecurityGroup",
             security_group_name="lb-sg",
             description="lb security group",
-            vpc=self.vpc
+            vpc=vpc
         )
 
-        self.lb_security_group.add_ingress_rule(
+        lb_security_group.add_ingress_rule(
             peer=ec2.Peer.ipv4("0.0.0.0/0"),
             connection=ec2.Port.tcp(80),
         )
 
-        self.lb_security_group.add_ingress_rule(
+        lb_security_group.add_ingress_rule(
             peer=ec2.Peer.ipv4("0.0.0.0/0"),
             connection=ec2.Port.tcp(22),
         )
 
-        self.lb_security_group.add_ingress_rule(
+        lb_security_group.add_ingress_rule(
             peer=ec2.Peer.ipv4("0.0.0.0/0"),
             connection=ec2.Port.tcp(443),
         )      
 
-        self.lb_security_group.add_egress_rule(
+        lb_security_group.add_egress_rule(
             peer=ec2.Peer.ipv4("0.0.0.0/0"),
             connection=ec2.Port.all_traffic(),
         )       
@@ -64,26 +64,25 @@ class VpcModule(Stack):
         # Create a security group server-sg
 
 
-        self.server_security_group = ec2.SecurityGroup(
+        server_security_group = ec2.SecurityGroup(
             self, "ServerSecurityGroup",
             security_group_name="server-sg",
             description="server security group",
-            vpc=self.vpc
+            vpc=vpc
         )
 
-        self.server_security_group.add_ingress_rule(
-            peer=self.lb_security_group,
+        server_security_group.add_ingress_rule(
+            peer=lb_security_group,
             connection=ec2.Port.tcp(80),
         )
-        self.server_security_group.add_ingress_rule(
+        server_security_group.add_ingress_rule(
             peer=ec2.Peer.ipv4("0.0.0.0/0"),
             connection=ec2.Port.tcp(22),
         )
 
-        self.server_security_group.add_egress_rule(
+        server_security_group.add_egress_rule(
             peer=ec2.Peer.ipv4("0.0.0.0/0"),
             connection=ec2.Port.all_traffic(),
         )
-
 
        
