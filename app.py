@@ -31,16 +31,12 @@ load_balancer_module=LoadBalancerModule(app,"LbModule",
      )
 
 load_balancer_module.add_dependency(ec2_module)
-<<<<<<< HEAD
-=======
 
 bastion_stack = BastionStack(app, "BastionStack", 
     vpc=vpc_module.vpc,
     lb_security_group=vpc_module.lb_security_group,
     server_security_group=vpc_module.server_security_group
     )
->>>>>>> 5f8b392f4bd9f94a38c224dbab0a304cb3198d90
-
 
 # # Add more modules/stacks as needed
 app.synth()
