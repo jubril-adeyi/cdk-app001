@@ -3,6 +3,8 @@ import os
 
 import aws_cdk as cdk
 
+from aws_cdk import Stack
+
 # from lib.cdk_stack import CdkAppStack
 from lib.vpc_module import VpcModule
 
