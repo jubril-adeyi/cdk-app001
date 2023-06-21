@@ -20,7 +20,7 @@ ec2_module = Ec2Module(app, "Ec2Module", vpc=vpc_module.vpc, server_security_gro
 ec2_module.add_dependency(vpc_module)
 
 # Instantiate LoadBalancerModule pass the VPC and server security group
-load_balancer_module=LoadBalancerModule(self,"LbModule", 
+load_balancer_module=LoadBalancerModule(app,"LbModule", 
      vpc=vpc_module.vpc,
      lb_security_group=vpc_module.lb_security_group,
      public_server_1=ec2_module.public_server_1, 
