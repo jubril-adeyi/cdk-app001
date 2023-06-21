@@ -4,7 +4,7 @@ from aws_cdk import (Duration, Stack, aws_ec2 as ec2,
     aws_elasticloadbalancingv2_targets as elb_targets
 )
 
-class LoadBalancerModule(Stack):
+class AppLoadBalancerStack(Stack):
     def __init__(self, scope: Construct, construct_id: str, vpc, lb_security_group, public_server_1, public_server_2, **kwargs) -> None:
         super().__init__(scope, construct_id, **kwargs)
 
