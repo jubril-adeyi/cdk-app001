@@ -9,7 +9,7 @@ class IamUserStack(Stack):
         # Create IAM user
         user = iam.User(self, "AdminUser", user_name="mainAdmin")
 
-        user.add_to_group("admin")
+        user.add_to_group(admin)
 
         # Add IAM user policies
         user.add_managed_policy(iam.ManagedPolicy.from_aws_managed_policy_name("AdministratorAccess"))
