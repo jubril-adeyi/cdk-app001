@@ -2,9 +2,10 @@ from constructs import Construct
 from aws_cdk import (Stack, 
     aws_ec2 as ec2,
     )
+from lib.vpc_module import VpcModule
 
 class Ec2Module(Stack):
-    def __init__(self, scope: Construct, construct_id: str, **kwargs) -> None:
+    def __init__(self, scope: Construct, construct_id: str, vpc_module: VpcModule, **kwargs) -> None:
         super().__init__(scope, construct_id, **kwargs)
 
   # Create Ec2 Instances
