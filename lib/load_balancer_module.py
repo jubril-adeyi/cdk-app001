@@ -6,7 +6,7 @@ from aws_cdk import (Duration,
     aws_elasticloadbalancingv2_targets as elb_targets
     )
 
-class LoadbalancerModule(Stack):
+class LoadBalancerModule(Stack):
     def __init__(self, scope: Construct, construct_id: str, vpc, public_server_1, public_server_2, **kwargs) -> None:
         super().__init__(scope, construct_id, **kwargs)
 
