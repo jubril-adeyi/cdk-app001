@@ -5,7 +5,7 @@ from aws_cdk import (Stack,
 from lib.vpc_module import VpcModule
 
 class Ec2Module(Stack):
-    def __init__(self, scope: Construct, construct_id: str, vpc, server_security_group, **kwargs) -> None:
+    def __init__(self, scope: Construct, construct_id: str, **kwargs) -> None:
         super().__init__(scope, construct_id, **kwargs)
 
   # Create Ec2 Instances
