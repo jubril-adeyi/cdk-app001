@@ -1,6 +1,5 @@
 from constructs import Construct
-from aws_cdk import (Duration, 
-    Stack, 
+from aws_cdk import (Stack, 
     aws_ec2 as ec2,
     )
 

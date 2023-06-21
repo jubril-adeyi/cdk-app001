@@ -4,8 +4,9 @@ import aws_cdk as cdk
 from aws_cdk import Stack
 from constructs import Construct
 
-# from lib.cdk_stack import CdkAppStack
+# from lib import neccesary modules
 from lib.vpc_module import VpcModule
+from lib.ec2_instance_module import Ec2Module
 
 # Main appStack that calls other modules 
 class CdkAppStack(Stack):
@@ -14,7 +15,11 @@ class CdkAppStack(Stack):
 
         vpc_module = VpcModule(self, "VpcModule")
 
+        ec2_instance_module=Ec2Module(self,"Ec2Module")
+
         
+
+
 
 
 app = cdk.App()
