@@ -347,27 +347,6 @@ class CdkAppStack(Stack):
         )
 
 
-        # Extract public Ips into host inventory file 
-        public_server_1_ip = public_server_1.instance_public_ip
-        public_server_2_ip = public_server_2.instance_public_ip
-
-        # create list
-
-        ip_addresses = []
-
-        # append list 
-
-        ip_addresses.append(public_server_1.instance_public_ip)
-        ip_addresses.append(public_server_2.instance_public_ip)
-
-        # Write the content to a local file
-
-        with open("host-inventory", "w") as file:
-            for ip_address in ip_addresses:
-                file.write(ip_address + "\n" )
-
-
-
 
 
 
