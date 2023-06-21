@@ -11,7 +11,7 @@ class Ec2Module(Stack):
   # Create Ec2 Instances
         key_name = "key" 
 
-        public_server_1 = ec2.Instance(
+        self.public_server_1 = ec2.Instance(
             self,
             "public-server-1",
             instance_name="server03",
@@ -23,7 +23,7 @@ class Ec2Module(Stack):
             instance_type=ec2.InstanceType("t2.micro"), 
         )
 
-        public_server_2 = ec2.Instance(
+        self.public_server_2 = ec2.Instance(
             self,
             "public-server-2",
             instance_name="server04",

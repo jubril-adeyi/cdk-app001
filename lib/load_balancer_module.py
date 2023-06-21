@@ -7,14 +7,16 @@ from aws_cdk import (Duration,
     )
 
 class LoadbalancerModule(Stack):
-    def __init__(self, scope: Construct, construct_id: str, **kwargs) -> None:
+    def __init__(self, scope: Construct, construct_id: str, vpc, public_server_1, public_server_2, **kwargs) -> None:
         super().__init__(scope, construct_id, **kwargs)
+
+    lb_port=80
     
     lb = elb.ApplicationLoadBalancer(
             self,
             "load-balancer2227",
             load_balancer_name="server-lb",
-            vpc=self.vpc,
+            vpc=vpc,
             internet_facing=True,
             security_group=self.lb_security_group,
             vpc_subnets=ec2.SubnetSelection(subnet_type=ec2.SubnetType.PUBLIC),
@@ -29,7 +31,7 @@ class LoadbalancerModule(Stack):
         target_type=elb.TargetType.INSTANCE,
         port=lb_port,
         protocol=elb.ApplicationProtocol.HTTP,
-        vpc=self.vpc,
+        vpc=vpc,
         stickiness_cookie_duration=Duration.seconds(30),
         targets=[
             elb_targets.InstanceIdTarget(public_server_1.instance_id, port=80),
