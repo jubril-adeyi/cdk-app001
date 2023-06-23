@@ -39,5 +39,7 @@ bastion_stack = BastionStack(app, "BastionStack",
     server_security_group=vpc_stack.server_security_group
     )
 
+iam_user_stack = IamUserStack(app, "IAMUserStack")
+
 # # Add more modules/stacks as needed
 app.synth()
