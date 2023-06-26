@@ -33,6 +33,7 @@ load_balancer_stack=AppLoadBalancerStack(app,"AppLoadBalancerStack",
 
 load_balancer_stack.add_dependency(ec2_stack)
 
+# Instantiate BastionStack 
 bastion_stack = BastionStack(app, "BastionStack", 
     vpc=vpc_stack.vpc,
     lb_security_group=vpc_stack.lb_security_group,
